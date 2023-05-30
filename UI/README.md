@@ -38,14 +38,19 @@ void main() {
 > * StatelessWidget class와 State class의 abstract method이기 때문에 반드시 구현을 해야한다.  
 > * 이 함수는 위젯이 지정된 BuildContext 트리에 삽입되거나, 위젯의 종속성이 변경되었을 때(참조하던 Inherited 위젯이 변경) 호출된다. 이 함수는 매 프레임마다 호출될 수 있고, 위젯을 빌드하는 것 이외에 어느 Side Effects도 가져선 안된다.  
 > * 프레임워크는 Build 함수에서 반환 된 위젯으로 기존 서브트리를 업데이트하거나, 기존 서브트리를 제거한 후 새로운 서브트리를 팽창하여 이 위젯 아래의 서브트리를 대체한다. 서브트리를 업데이트 할 수 있는지의 여부는 Widget.canUpdate 함수를 통해 결정된다.
-
-canUpdate 함수에 대한 설명
-
-> bool canUpdate(Widget oldWidget, Widget newWidget) : newWidget을 사용하여 oldWidget의 현재 구성된 Element를 업데이트 할 수 있는지 여부를 판단하는 함수
 >
-> * Widget class의 static method
-> * runtimeType과 key가 같은 두 위젯의 Element는 다른 위젯의 구성 Element로 사용될 수 있다.
-> * 만약 두 위젯의 key 값이 null이라면 완전히 다른 두 위젯이어도 runtimeType이 동일한지만 고려한다.
+>> bool canUpdate(Widget oldWidget, Widget newWidget) : newWidget을 사용하여 oldWidget의 현재 구성된 Element를 업데이트 할 수 있는지 여부를 판단하는 함수
+>>
+>> * Widget class의 static method
+>> * runtimeType과 key가 같은 두 Widget의 Element는 다른 Widget의 구성 Element로 사용될 수 있다.
+>> * 만약 두 Widget의 key 값이 null이라면 완전히 다른 두 Widget이어도 runtimeType이 동일한지만 고려한다.
+>>
+>>> Element class
+>>>
+>>> * 모든 Widget의 인스턴스화, 업데이트, 소멸 등을 처리하는 클래스
+>>> * Widget을 사용하여 트리를 구성한다.
+>>> * Flutter의 기본 위젯이라고 할 수 있는 StatelessWidget, StatefulWidget, InheritedWidget은 각각 StatelessElement, StatefulElement, InheritedElement에 의해 관리된다.
+>>> * StatefulElement의 경우 State 객체를 통해 UI를 업데이트한다.
 
-Element class에 대한 설명  
-RenderObject에 대한 설명
+RenderObject란?
+> RenderObject에 대한 설명
